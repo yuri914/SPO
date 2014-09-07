@@ -59,8 +59,23 @@
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                
-	                    <p:outputLabel for="email" value="Email: " />
-	                    <p:inputText id="email" value="#{cadastroUsuarioBean.contato.email}" />
+	                <h:outputText for="cmbEstado" value="Estado: " />
+                    <p:selectOneMenu id="cmbEstado" value="#{cadastroUsuarioBean.estadoSelecionado}">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{cadastroUsuarioBean.estados}" var="estado" itemValue="#{estado}"
+						  itemLabel="#{estado.nome}" />
+						<f:ajax immediate="true" render="cmbCidade" event="change" listener="#{cadastroUsuarioBean.listarCidades}"></f:ajax>	  	
+				    </p:selectOneMenu>
+				    
+                    <p:outputLabel value="Cidade" for="cmbCidade" />
+					<p:selectOneMenu value="#{cadastroUsuarioBean.contato.cidade}" id="cmbCidade">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+							<f:selectItems value="#{cadastroUsuarioBean.cidades}" var="cidade" itemValue="#{cidade}"
+							  itemLabel="#{cidade.nome}" />
+				    </p:selectOneMenu>
+	                
+                    <p:outputLabel for="email" value="Email: " />
+                    <p:inputText id="email" value="#{cadastroUsuarioBean.contato.email}" />
 	                     
 	                </h:panelGrid>
 	            </p:panel>

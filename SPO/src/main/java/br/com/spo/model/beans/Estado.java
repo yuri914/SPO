@@ -8,43 +8,46 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_estado")
-public class Estado {
+public class Estado implements Entidade {
+
+    private static final long serialVersionUID = 2032678748187663637L;
     
     @Id
     @GeneratedValue
     @Column(nullable = false)
     private Long id;
-    
+
     @Column
     private String nome;
-    
+
     @Column
     private String sigla;
-    
+
+    @Override
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
-    
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public String getSigla() {
         return sigla;
     }
-    
+
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -52,7 +55,7 @@ public class Estado {
         result = (prime * result) + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,5 +77,5 @@ public class Estado {
         }
         return true;
     }
-    
+
 }
