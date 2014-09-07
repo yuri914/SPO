@@ -7,7 +7,9 @@ import br.com.spo.service.interfaces.IPalpiteService;
 
 public class PalpiteService implements IPalpiteService {
 
-    @Override
+	private static final long serialVersionUID = 698515173702782333L;
+
+	@Override
     public List<Palpite> listarTodos() {
         return null;
     }

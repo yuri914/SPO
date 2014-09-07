@@ -10,7 +10,9 @@ public class EstadoService implements IEstadoService {
     
     private EstadoDao estadoDao;
 
-    @Override
+	private static final long serialVersionUID = -7113940442347954816L;
+
+	@Override
     public List<Estado> listarTodos() {
         return getEstadoDao().listarTodos();
     }

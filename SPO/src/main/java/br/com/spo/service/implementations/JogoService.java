@@ -12,7 +12,9 @@ import br.com.spo.service.interfaces.IJogoService;
 
 public class JogoService implements IJogoService {
 
-    @Override
+	private static final long serialVersionUID = 6119199650878854068L;
+
+	@Override
     public List<Jogo> listarTodos() {
         
         List<Jogo> jogos = new ArrayList<>();
