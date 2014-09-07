@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Página Inicial</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+		
+		<p:panel styleClass="panel">
+		
+			<h:panelGrid columns="2" columnClasses="grid, grid">
+		
+			<p:panel style="border: none">
+				<h:panelGrid styleClass="alpha70" columns="2">
+					<p:outputLabel value="Clasificação Geral "></p:outputLabel>
+					<p:inputText disabled="true" value="5°" size="1" style="text-align: center"></p:inputText>
+				</h:panelGrid>
+				
+				<h4 class="grid_2_5 alpha78">Palpites da Rodada</h4>
+				
+				<div class="clear"></div>
+				
+				<ui:repeat var="jogo" value="#{homeBean.jogos}">
+					<h:panelGrid styleClass="alpha40" columns="5">
+						<p:graphicImage value="#{jogo.equipeMandante.escudo}" />
+						<p:inputText size="3"></p:inputText>
+						
+						<h:outputText value="X"></h:outputText>
+						
+						<p:inputText size="3"></p:inputText>
+						<p:graphicImage  value="#{jogo.equipeVisitante.escudo}" />
+						
+					</h:panelGrid>
+					
+					<div class="clear"></div>
+					
+					<div class="grid_5_5 alpha12_menos centralizarTexto">
+						<h:outputText value="Local: #{jogo.estadio.nome} / Data: #{jogo.dataFormatada}" />
+					</div>
+					
+					<div class="clear"></div>
+				</ui:repeat>
+			</p:panel>
+			
+<!-- 			<p:panel style="border: none"> -->
+<!-- 				<p:chart type="line" model="#{chartView.graficoModel}" style="height:300px;"/> -->
+<!-- 			</p:panel> -->
+
+				</h:panelGrid>
+		</p:panel>
+			
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

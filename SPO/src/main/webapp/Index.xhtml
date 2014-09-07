@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Pitaco de Ouro</title>
+</h:head>
+<h:body>
+
+	<style type="text/css">
+		@IMPORT url("css/geral.css");
+		@IMPORT url("css/960.css");
+	</style>
+
+	<p:panel id="login-dialog">
+		<h:form>
+			<p:messages autoUpdate="true" closable="true"></p:messages>
+			<h:panelGrid columns="2" styleClass="grid-login">
+				<p:outputLabel for="username" value="Login"></p:outputLabel>
+				<p:inputText id="username" value="#{loginBean.usuario.username}"></p:inputText>
+				<p:outputLabel for="senha" value="Senha"></p:outputLabel>
+				<p:password id="senha" value="#{loginBean.usuario.password}"></p:password>
+
+				<h:outputText />
+				<p:commandButton styleClass="floatRight" value="Entrar" action="#{loginBean.autenticar}"></p:commandButton>
+			</h:panelGrid>
+
+			<p:link styleClass="alpha30" value="Ainda não palpitou? Palpite já!" outcome="CadastroUsuario"></p:link>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>
