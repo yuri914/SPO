@@ -8,7 +8,9 @@ import br.com.spo.service.interfaces.IEstadoService;
 
 public class EstadoService implements IEstadoService {
 
-    @Override
+	private static final long serialVersionUID = -7113940442347954816L;
+
+	@Override
     public List<Estado> listarTodos() {
         List<Estado> estados = new ArrayList<>();
         for (int i = 1; i < 6; i++) {

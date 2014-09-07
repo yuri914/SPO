@@ -4,7 +4,9 @@ import br.com.spo.service.interfaces.IUsuarioService;
 
 public class UsuarioService implements IUsuarioService {
     
-    @Override
+	private static final long serialVersionUID = -8144950014959940389L;
+
+	@Override
     public void salvar() {
         
     }

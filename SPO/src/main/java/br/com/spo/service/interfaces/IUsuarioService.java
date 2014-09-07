@@ -1,6 +1,8 @@
 package br.com.spo.service.interfaces;
 
-public interface IUsuarioService {
+import java.io.Serializable;
+
+public interface IUsuarioService extends Serializable {
     
     public void salvar();
 
