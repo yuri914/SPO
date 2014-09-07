@@ -38,7 +38,8 @@ public class CadastroUsuarioBean {
         estados = getEstadoService().listarTodos();
     }
 
-    public void save() {
+    public void salvar() {
+
         FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + usuario.getNome());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
