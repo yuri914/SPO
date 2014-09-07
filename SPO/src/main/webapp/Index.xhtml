@@ -17,7 +17,7 @@
 
 	<p:panel id="login-dialog">
 		<h:form>
-			<p:messages autoUpdate="true" closable="true"></p:messages>
+			<p:growl sticky="true" showDetail="false" autoUpdate="true"></p:growl>
 			<h:panelGrid columns="2" styleClass="grid-login">
 				<p:outputLabel for="username" value="Login"></p:outputLabel>
 				<p:inputText id="username" value="#{loginBean.usuario.username}"></p:inputText>
