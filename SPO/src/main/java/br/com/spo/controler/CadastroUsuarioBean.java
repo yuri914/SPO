@@ -1,5 +1,6 @@
 package br.com.spo.controler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +18,12 @@ import br.com.spo.model.beans.Contato;
 import br.com.spo.model.beans.Estado;
 import br.com.spo.model.beans.Usuario;
 import br.com.spo.model.enumerations.Genero;
+import br.com.spo.model.enumerations.Telas;
 import br.com.spo.service.implementations.CidadeService;
 import br.com.spo.service.implementations.ContatoService;
 import br.com.spo.service.implementations.EstadoService;
 import br.com.spo.service.implementations.UsuarioService;
+import br.com.spo.util.FacesUtil;
 
 @ManagedBean
 @ApplicationScoped
@@ -44,11 +47,14 @@ public class CadastroUsuarioBean {
         estados = getEstadoService().listarTodos();
     }
 
-    public void salvar() {
+    public String salvar() {
+    	String outcome = null;
         contato.getUsuario().setDataCadastro(new Date());
         getContatoService().salvar(contato);
         FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + contato.getUsuario().getNome());
+        outcome = FacesUtil.redirecionar(Telas.HOME.getUrl());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        return outcome;
     }
     
     public void listarCidades(AjaxBehaviorEvent event) {
@@ -63,6 +69,12 @@ public class CadastroUsuarioBean {
     
     public Genero[] getGeneros() {
         return Genero.values();
+    }
+    
+    public String getDataFormatada() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sdf.format(contato.getUsuario().getDataNascimento());
+        return dataFormatada;
     }
     
     public Contato getContato() {
