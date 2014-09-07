@@ -27,25 +27,25 @@
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                    <p:outputLabel value="Nome:" for="nome" />
-	                    <p:inputText value="#{cadastroUsuarioBean.usuario.nome}" required="true" requiredMessage="Campo 'Nome' é obrigátorio." label="Nome" id="nome"/>
+	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" required="true" requiredMessage="Campo 'Nome' é obrigátorio." label="Nome" id="nome"/>
 	 
 	                    <p:outputLabel value="Gênero:" for="genero"/>
-	                    <p:selectOneRadio value="#{cadastroUsuarioBean.usuario.genero}" requiredMessage="Campo 'Gênero' é obrigátorio." required="true" label="Gênero" id="genero">
+	                    <p:selectOneRadio value="#{cadastroUsuarioBean.contato.usuario.genero}" requiredMessage="Campo 'Gênero' é obrigátorio." required="true" label="Gênero" id="genero">
 	                    		<f:selectItems value="#{cadastroUsuarioBean.generos}" var="genero" itemValue="#{genero}"
 	                    		itemLabel="#{genero.descricao}"/>
 	                    </p:selectOneRadio>
 	 
 	                    <p:outputLabel value="Data Nascimento: " for="dataNascimento" />
 	                    <p:calendar  id="dataNascimento" pattern="dd/MM/yyyy" 
-						value="#{cadastroUsuarioBean.usuario.dataNascimento}" >
+						value="#{cadastroUsuarioBean.contato.usuario.dataNascimento}" >
 								<f:convertDateTime type="date" locale="pt_BR" timeZone="America/Sao_Paulo" />
 						</p:calendar>
 	 
 	                    <p:outputLabel value="Usuario: "  for="usuario"/>
-	                    <p:inputText value="#{cadastroUsuarioBean.usuario.username}" id="usuario"/>
+	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.username}" id="usuario"/>
 	                    
 						<p:outputLabel value="Senha: " for="password"/>
-	                    <p:password value="#{cadastroUsuarioBean.usuario.password}" id="password"/>
+	                    <p:password value="#{cadastroUsuarioBean.contato.usuario.password}" id="password"/>
 	                    
 	                    <p:outputLabel value="Confirmar: " for="confirma"/>
 	                    <p:password id="confirma"/>
@@ -86,13 +86,13 @@
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                	<p:outputLabel value="Nome: " />
-	                    <h:outputText value="#{cadastroUsuarioBean.usuario.nome}" styleClass="outputLabel"/>
+	                    <h:outputText value="#{cadastroUsuarioBean.contato.usuario.nome}" styleClass="outputLabel"/>
 	                    
 	    				<p:outputLabel value="Gênero: " />
-	                    <h:outputText value="#{cadastroUsuarioBean.usuario.genero.descricao}" styleClass="outputLabel"/>
+	                    <h:outputText value="#{cadastroUsuarioBean.contato.usuario.genero.descricao}" styleClass="outputLabel"/>
 	                    
 	                    <p:outputLabel value="Data Nascimento: " />
-	                    <h:outputText value="#{cadastroUsuarioBean.usuario.dataNascimento}" styleClass="outputLabel"/>
+	                    <h:outputText value="#{cadastroUsuarioBean.contato.usuario.dataNascimento}" styleClass="outputLabel"/>
 	 
 	                    <p:outputLabel value="Estado: " />
 	                    <h:outputText value="#{cadastroUsuarioBean.contato.cidade.estado.nome}" styleClass="outputLabel"/>

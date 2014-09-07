@@ -1,6 +1,7 @@
 package br.com.spo.controler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -17,7 +18,9 @@ import br.com.spo.model.beans.Estado;
 import br.com.spo.model.beans.Usuario;
 import br.com.spo.model.enumerations.Genero;
 import br.com.spo.service.implementations.CidadeService;
+import br.com.spo.service.implementations.ContatoService;
 import br.com.spo.service.implementations.EstadoService;
+import br.com.spo.service.implementations.UsuarioService;
 
 @ManagedBean
 @ApplicationScoped
@@ -32,15 +35,19 @@ public class CadastroUsuarioBean {
     private EstadoService estadoService;
 
     private CidadeService cidadeService;
+    
+    private UsuarioService usuarioService;
+
+    private ContatoService contatoService;
 
     public CadastroUsuarioBean() {
-        getUsuario();
         estados = getEstadoService().listarTodos();
     }
 
     public void salvar() {
-
-        FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + usuario.getNome());
+        contato.getUsuario().setDataCadastro(new Date());
+        getContatoService().salvar(contato);
+        FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + contato.getUsuario().getNome());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
@@ -120,5 +127,19 @@ public class CadastroUsuarioBean {
     public void setEstados(List<Estado> estados) {
         this.estados = estados;
     }
+
+    public ContatoService getContatoService() {
+        if (contatoService == null) {
+            contatoService = new ContatoService();
+        }
+        return contatoService;
+    }
     
+    public UsuarioService getUsuarioService() {
+        if (usuarioService == null) {
+            usuarioService = new UsuarioService();
+        }
+        return usuarioService;
+    }
+
 }

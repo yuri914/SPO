@@ -2,8 +2,10 @@ package br.com.spo.service.interfaces;
 
 import java.io.Serializable;
 
-public interface IContatoService extends Serializable{
+import br.com.spo.model.beans.Contato;
 
-    public void salvar();
-
+public interface IContatoService extends Serializable {
+    
+    public void salvar(Contato contato);
+    
 }
