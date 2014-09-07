@@ -60,15 +60,15 @@
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                
 	                <h:outputText for="cmbEstado" value="Estado: " />
-                    <p:selectOneMenu id="cmbEstado" value="#{cadastroUsuarioBean.estadoSelecionado}">
+                    <p:selectOneMenu filter="true" converter="estadoConverter" id="cmbEstado" value="#{cadastroUsuarioBean.estadoSelecionado}">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 						<f:selectItems value="#{cadastroUsuarioBean.estados}" var="estado" itemValue="#{estado}"
 						  itemLabel="#{estado.nome}" />
-						<f:ajax immediate="true" render="cmbCidade" event="change" listener="#{cadastroUsuarioBean.listarCidades}"></f:ajax>	  	
+						<f:ajax render="cmbCidade" event="change" listener="#{cadastroUsuarioBean.listarCidades}"></f:ajax>	  	
 				    </p:selectOneMenu>
 				    
                     <p:outputLabel value="Cidade" for="cmbCidade" />
-					<p:selectOneMenu value="#{cadastroUsuarioBean.contato.cidade}" id="cmbCidade">
+					<p:selectOneMenu filter="true" converter="cidadeConverter" value="#{cadastroUsuarioBean.contato.cidade}" id="cmbCidade">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItems value="#{cadastroUsuarioBean.cidades}" var="cidade" itemValue="#{cidade}"
 							  itemLabel="#{cidade.nome}" />
@@ -94,17 +94,17 @@
 	                    <p:outputLabel value="Data Nascimento: " />
 	                    <h:outputText value="#{cadastroUsuarioBean.usuario.dataNascimento}" styleClass="outputLabel"/>
 	 
-	                    <p:outputLabel value="Cidade: " />
-	                    <h:outputText value="#{cadastroUsuarioBean.cidade.nome}" styleClass="outputLabel"/>
-	                    
 	                    <p:outputLabel value="Estado: " />
-	                    <h:outputText value="#{cadastroUsuarioBean.cidade.estado.name}" styleClass="outputLabel"/>
+	                    <h:outputText value="#{cadastroUsuarioBean.contato.cidade.estado.nome}" styleClass="outputLabel"/>
+	                    
+	                    <p:outputLabel value="Cidade: " />
+	                    <h:outputText value="#{cadastroUsuarioBean.contato.cidade.nome}" styleClass="outputLabel"/>
 	                    
 	                    <p:outputLabel value="Email: " />
 	                    <h:outputText value="#{cadastroUsuarioBean.contato.email}" styleClass="outputLabel"/>
 	                    
 	                </h:panelGrid>
-	                	<p:commandButton value="Confirmar" actionListener="#{cadastroUsuarioBean.save}" update="growl" process="@this"/>
+	                	<p:commandButton value="Confirmar" actionListener="#{cadastroUsuarioBean.salvar}" update="growl" process="@this"/>
 	              </p:panel>
 	        </p:tab>
 	    </p:wizard>
