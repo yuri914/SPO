@@ -28,13 +28,12 @@
 				<ui:repeat var="jogo" value="#{homeBean.jogos}">
 					<h:panelGrid styleClass="alpha40" columns="5">
 						<p:graphicImage value="#{jogo.equipeMandante.escudo}" />
-						<p:inputText size="3"></p:inputText>
+						<p:inputText styleClass="centralizarTexto" maxlength="2" size="3"></p:inputText>
 						
 						<h:outputText value="X"></h:outputText>
 						
-						<p:inputText size="3"></p:inputText>
+						<p:inputText styleClass="centralizarTexto" maxlength="2" size="3"></p:inputText>
 						<p:graphicImage  value="#{jogo.equipeVisitante.escudo}" />
-						
 					</h:panelGrid>
 					
 					<div class="clear"></div>
@@ -47,11 +46,7 @@
 				</ui:repeat>
 			</p:panel>
 			
-<!-- 			<p:panel style="border: none"> -->
-<!-- 				<p:chart type="line" model="#{chartView.graficoModel}" style="height:300px;"/> -->
-<!-- 			</p:panel> -->
-
-				</h:panelGrid>
+			</h:panelGrid>
 		</p:panel>
 			
 		</h:form>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.spo.model.beans.Jogo;
 
-public interface IJogoService extends Serializable{
+public interface IJogoService extends Serializable {
 
     public List<Jogo> listarTodos();
 

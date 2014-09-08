@@ -17,20 +17,19 @@
 	
 	<h:form>
 						
-	<p:growl id="growl" sticky="true" showDetail="true"/>
+	<p:growl id="growl" autoUpdate="true" sticky="true" showDetail="true"/>
  
- 	<p:panel styleClass="panelCadastro">
-	    <p:wizard styleClass="centralizar grid_9" flowListener="#{cadastroUsuarioBean.onFlowProcess}" nextLabel="Próximo" backLabel="Voltar">
+	    <p:wizard styleClass="panelCadastro" flowListener="#{cadastroUsuarioBean.onFlowProcess}" nextLabel="Próximo" backLabel="Voltar">
 	    
 	        <p:tab  id="pessoal" title="Pessoal">
 	            <p:panel header="Detalhes Pessoal">
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                    <p:outputLabel value="Nome:" for="nome" />
-	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" required="true" requiredMessage="Campo 'Nome' é obrigátorio." label="Nome" id="nome"/>
+	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" label="Nome" id="nome"/>
 	 
 	                    <p:outputLabel value="Gênero:" for="genero"/>
-	                    <p:selectOneRadio value="#{cadastroUsuarioBean.contato.usuario.genero}" requiredMessage="Campo 'Gênero' é obrigátorio." required="true" label="Gênero" id="genero">
+	                    <p:selectOneRadio value="#{cadastroUsuarioBean.contato.usuario.genero}" label="Gênero" id="genero">
 	                    		<f:selectItems value="#{cadastroUsuarioBean.generos}" var="genero" itemValue="#{genero}"
 	                    		itemLabel="#{genero.descricao}"/>
 	                    </p:selectOneRadio>
@@ -60,7 +59,7 @@
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                
 	                <h:outputText for="cmbEstado" value="Estado: " />
-                    <p:selectOneMenu filter="true" converter="estadoConverter" id="cmbEstado" value="#{cadastroUsuarioBean.estadoSelecionado}">
+                    <p:selectOneMenu effect="fold" filter="true" converter="estadoConverter" id="cmbEstado" value="#{cadastroUsuarioBean.estadoSelecionado}">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 						<f:selectItems value="#{cadastroUsuarioBean.estados}" var="estado" itemValue="#{estado}"
 						  itemLabel="#{estado.nome}" />
@@ -68,7 +67,7 @@
 				    </p:selectOneMenu>
 				    
                     <p:outputLabel value="Cidade" for="cmbCidade" />
-					<p:selectOneMenu filter="true" converter="cidadeConverter" value="#{cadastroUsuarioBean.contato.cidade}" id="cmbCidade">
+					<p:selectOneMenu effect="fold" filter="true" converter="cidadeConverter" value="#{cadastroUsuarioBean.contato.cidade}" id="cmbCidade">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItems value="#{cadastroUsuarioBean.cidades}" var="cidade" itemValue="#{cidade}"
 							  itemLabel="#{cidade.nome}" />
@@ -108,7 +107,6 @@
 	              </p:panel>
 	        </p:tab>
 	    </p:wizard>
-    </p:panel>
  
 	</h:form>
 	

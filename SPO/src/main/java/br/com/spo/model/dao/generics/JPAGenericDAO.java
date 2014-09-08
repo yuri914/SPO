@@ -25,8 +25,6 @@ public class JPAGenericDAO<T extends Serializable> implements GenericDAO<T> {
     @SuppressWarnings("unchecked")
     public JPAGenericDAO() {
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("MySQLPersistence");
-        entityManager = factory.createEntityManager();
     }
     
     public JPAGenericDAO(EntityManager entityManager) {
@@ -47,7 +45,10 @@ public class JPAGenericDAO<T extends Serializable> implements GenericDAO<T> {
     
     protected EntityManager getEntityManager() {
         if (this.entityManager == null) {
-            throw new IllegalStateException("EntityManager has not been set on DAO before usage");
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("MySQLPersistence");
+            entityManager = factory.createEntityManager();
+            // throw new
+            // IllegalStateException("EntityManager has not been set on DAO before usage");
         }
         return this.entityManager;
     }
@@ -84,7 +85,7 @@ public class JPAGenericDAO<T extends Serializable> implements GenericDAO<T> {
     
     @Override
     public T buscarPorId(Serializable id) {
-        return this.entityManager.find(getPersistentClass(), id);
+        return this.getEntityManager().find(getPersistentClass(), id);
     }
     
     @SuppressWarnings("unchecked")

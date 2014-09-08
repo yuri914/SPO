@@ -28,27 +28,27 @@ import br.com.spo.util.FacesUtil;
 @ManagedBean
 @ApplicationScoped
 public class CadastroUsuarioBean {
-    
+
     private Usuario usuario;
     private Contato contato;
     private Estado estadoSelecionado;
     private List<Estado> estados;
     private List<Cidade> cidades;
-    
+
     private EstadoService estadoService;
-
-    private CidadeService cidadeService;
     
+    private CidadeService cidadeService;
+
     private UsuarioService usuarioService;
-
+    
     private ContatoService contatoService;
-
+    
     public CadastroUsuarioBean() {
         estados = getEstadoService().listarTodos();
     }
-
+    
     public String salvar() {
-    	String outcome = null;
+        String outcome = null;
         contato.getUsuario().setDataCadastro(new Date());
         getContatoService().salvar(contato);
         FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + contato.getUsuario().getNome());
@@ -56,102 +56,106 @@ public class CadastroUsuarioBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return outcome;
     }
-    
+
     public void listarCidades(AjaxBehaviorEvent event) {
         if (estadoSelecionado != null) {
             cidades = getCidadeService().listarCidades(estadoSelecionado);
         }
     }
-    
+
     public String onFlowProcess(FlowEvent event) {
         return event.getNewStep();
     }
-    
+
     public Genero[] getGeneros() {
         return Genero.values();
     }
-    
+
     public String getDataFormatada() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = sdf.format(contato.getUsuario().getDataNascimento());
-        return dataFormatada;
+        if (contato.getUsuario().getDataNascimento() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = sdf.format(contato.getUsuario().getDataNascimento());
+            return dataFormatada;
+        } else {
+            return "";
+        }
     }
-    
+
     public Contato getContato() {
         if (contato == null) {
             contato = new Contato();
         }
         return contato;
     }
-    
+
     public void setContato(Contato contato) {
         this.contato = contato;
     }
-    
+
     public Usuario getUsuario() {
         if (usuario == null) {
             usuario = new Usuario();
         }
         return usuario;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public List<Cidade> getCidades() {
         if (cidades == null) {
             cidades = new ArrayList<Cidade>();
         }
         return cidades;
     }
-    
+
     public void setCidades(List<Cidade> cidades) {
         this.cidades = cidades;
     }
-
+    
     public CidadeService getCidadeService() {
         if (cidadeService == null) {
             cidadeService = new CidadeService();
         }
         return cidadeService;
     }
-    
+
     public EstadoService getEstadoService() {
         if (estadoService == null) {
             estadoService = new EstadoService();
         }
         return estadoService;
     }
-    
+
     public Estado getEstadoSelecionado() {
         return estadoSelecionado;
     }
-    
+
     public void setEstadoSelecionado(Estado estadoSelecionado) {
         this.estadoSelecionado = estadoSelecionado;
     }
-
+    
     public List<Estado> getEstados() {
         return estados;
     }
-
+    
     public void setEstados(List<Estado> estados) {
         this.estados = estados;
     }
-
+    
     public ContatoService getContatoService() {
         if (contatoService == null) {
             contatoService = new ContatoService();
         }
         return contatoService;
     }
-    
+
     public UsuarioService getUsuarioService() {
         if (usuarioService == null) {
             usuarioService = new UsuarioService();
         }
         return usuarioService;
     }
-
+    
 }

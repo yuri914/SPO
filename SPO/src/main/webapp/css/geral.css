@@ -57,9 +57,10 @@ body {
 }
 
 .panelCadastro {
+	background-color: #DFE4E6 !important;
+	border-radius: 4px;
 	width: 540px;
 	height: 350px;
 	margin: 160px auto auto;
-	border-radius: 10px;
 	border: 1px solid;
 }
