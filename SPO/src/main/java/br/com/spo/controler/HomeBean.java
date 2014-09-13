@@ -7,14 +7,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.CategoryAxis;
-import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.PieChartModel;
 
+import br.com.spo.model.beans.Estatistica;
 import br.com.spo.model.beans.Jogo;
+import br.com.spo.service.implementations.EstatisticaService;
 import br.com.spo.service.implementations.JogoService;
+import br.com.spo.util.FacesUtil;
 
 @ManagedBean
 @ViewScoped
@@ -22,10 +21,13 @@ public class HomeBean {
 
     private List<Jogo> jogos;
 
-    private LineChartModel graficoModel;
+    private PieChartModel pieModel;
     
     @Inject
     private JogoService jogoService;
+    
+    @Inject
+    private EstatisticaService estatisticaService;
 
     public HomeBean() {
         jogos = getJogoService().listarTodos();
@@ -33,39 +35,26 @@ public class HomeBean {
 
     @PostConstruct
     public void init() {
-        criarGraficoModel();
+        criarPieModel();
     }
 
-    private void criarGraficoModel() {
-        graficoModel = initModel();
-        graficoModel.setTitle("Palpites em Cheio");
-        graficoModel.setLegendPosition("e");
-        graficoModel.setShowPointLabels(true);
-        graficoModel.getAxes().put(AxisType.X, new CategoryAxis("Rodadas"));
+    private void criarPieModel() {
 
-        Axis yAxis = graficoModel.getAxis(AxisType.Y);
-        yAxis = graficoModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Acertos");
-        yAxis.setMin(0);
-        yAxis.setMax(50);
+        // TODO Futuramente substituir os valores fixos pelas estatísticas do
+        // usuário logado
+        
+        Estatistica estatisticaUsuario = getEstatisticaService().findByUsuario(FacesUtil.getUsuarioLogado().getId());
+
+        pieModel = new PieChartModel();
+        pieModel.set("Placar em cheio", estatisticaUsuario.getPlacarCheio());
+        pieModel.set("Placar do perdedor", estatisticaUsuario.getPlacarPerdedor());
+        pieModel.set("Diferença de gols", estatisticaUsuario.getDiferencaGols());
+
+        pieModel.setShowDataLabels(true);
+        pieModel.setTitle("Estatística dos Palpites");
+        pieModel.setLegendPosition("w");
     }
-
-    private LineChartModel initModel() {
-        LineChartModel model = new LineChartModel();
-
-        ChartSeries palpitesCheio = new ChartSeries();
-        palpitesCheio.setLabel("Palpites");
-        palpitesCheio.set("13°", 2);
-        palpitesCheio.set("14°", 4);
-        palpitesCheio.set("15°", 5);
-        palpitesCheio.set("16°", 5);
-        palpitesCheio.set("17°", 8);
-
-        model.addSeries(palpitesCheio);
-
-        return model;
-    }
-
+    
     public List<Jogo> getJogos() {
         return jogos;
     }
@@ -73,16 +62,22 @@ public class HomeBean {
     public void setJogos(List<Jogo> jogos) {
         this.jogos = jogos;
     }
-
-    public LineChartModel getGraficoModel() {
-        return graficoModel;
+    
+    public PieChartModel getPieModel() {
+        return pieModel;
     }
     
+    public EstatisticaService getEstatisticaService() {
+        if (estatisticaService == null) {
+            estatisticaService = new EstatisticaService();
+        }
+        return estatisticaService;
+    }
+
     public JogoService getJogoService() {
         if (jogoService == null) {
             jogoService = new JogoService();
         }
         return jogoService;
     }
-
 }

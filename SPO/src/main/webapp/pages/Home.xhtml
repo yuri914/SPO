@@ -45,11 +45,16 @@
 					<div class="clear"></div>
 				</ui:repeat>
 			</p:panel>
-			
+
+			<p:panel style="border: none">
+				<p:chart type="pie" model="#{homeBean.pieModel}" style="width:400px;height:300px" />
+			</p:panel>
+
 			</h:panelGrid>
 		</p:panel>
-			
+		
 		</h:form>
+
 	</ui:define>
 	
 </ui:composition>

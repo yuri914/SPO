@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import br.com.spo.model.beans.Usuario;
+
 public class FacesUtil {
 
     public static String redirecionar(String url) {
@@ -16,6 +18,10 @@ public class FacesUtil {
 
     public static void invalidarSessao() {
         getFacesContext().getExternalContext().invalidateSession();
+    }
+    
+    public static Usuario getUsuarioLogado() {
+        return (Usuario) getSessionMap().get("usuarioLogado");
     }
 
     private static FacesContext getFacesContext() {

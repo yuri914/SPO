@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_estatistica")
+@NamedQueries({ @NamedQuery(name = "Estatistica.findByUsuario", query = "From Estatistica e where e.usuario.id = :idUsuario") })
 public class Estatistica implements Entidade {
 
     private static final long serialVersionUID = 5304369216711491156L;
