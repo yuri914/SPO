@@ -26,7 +26,9 @@
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                    <p:outputLabel value="Nome:" for="nome" />
-	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" label="Nome" id="nome"/>
+	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" label="Nome" id="nome">
+	                    	<f:ajax render="nome" event="blur" listener="#{cadastroUsuarioBean.nomeExistente}"></f:ajax>
+	                    </p:inputText>
 	 
 	                    <p:outputLabel value="Gênero:" for="genero"/>
 	                    <p:selectOneRadio value="#{cadastroUsuarioBean.contato.usuario.genero}" label="Gênero" id="genero">
@@ -103,7 +105,7 @@
 	                    <h:outputText value="#{cadastroUsuarioBean.contato.email}" styleClass="outputLabel"/>
 	                    
 	                </h:panelGrid>
-	                	<p:commandButton value="Confirmar" actionListener="#{cadastroUsuarioBean.salvar}" update="growl" process="@this"/>
+	                	<p:commandButton value="Confirmar" action="#{cadastroUsuarioBean.salvar}" update="growl" process="@this"/>
 	              </p:panel>
 	        </p:tab>
 	    </p:wizard>

@@ -6,11 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.FlowEvent;
 
 import br.com.spo.model.beans.Cidade;
@@ -26,7 +27,7 @@ import br.com.spo.service.implementations.UsuarioService;
 import br.com.spo.util.FacesUtil;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class CadastroUsuarioBean {
 
     private Usuario usuario;
@@ -43,6 +44,8 @@ public class CadastroUsuarioBean {
     
     private ContatoService contatoService;
     
+	private FacesMessage msg;
+    
     public CadastroUsuarioBean() {
         estados = getEstadoService().listarTodos();
     }
@@ -51,7 +54,7 @@ public class CadastroUsuarioBean {
         String outcome = null;
         contato.getUsuario().setDataCadastro(new Date());
         getContatoService().salvar(contato);
-        FacesMessage msg = new FacesMessage("Sucesso", "Bem vindo :" + contato.getUsuario().getNome());
+        msg = new FacesMessage("Sucesso", "Bem vindo :" + contato.getUsuario().getNome());
         outcome = FacesUtil.redirecionar(Telas.HOME.getUrl());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return outcome;
@@ -80,7 +83,18 @@ public class CadastroUsuarioBean {
             return "";
         }
     }
-
+    public void nomeExistente(AjaxBehaviorEvent event) {
+        if (StringUtils.isNotBlank(contato.getUsuario().getNome())) {
+            if(getUsuarioService().verificaNomeExistente(contato.getUsuario().getNome())){
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "", " Este usuário já existe !");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        }
+        
+    }
+    
+    
+    
     public Contato getContato() {
         if (contato == null) {
             contato = new Contato();

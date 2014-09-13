@@ -24,11 +24,16 @@ public class UsuarioService implements IUsuarioService {
         return usuarioAutenticado;
     }
 
+    public boolean verificaNomeExistente(String nome) {
+    	return getUsuarioDao().verificaNomeExistente(nome).intValue() > 0;
+    }
+    
     public UsuarioDao getUsuarioDao() {
         if (usuarioDao == null) {
             usuarioDao = new UsuarioDao();
         }
         return usuarioDao;
     }
+
     
 }

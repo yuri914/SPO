@@ -20,5 +20,13 @@ public class UsuarioDao extends JPAGenericDAO<Usuario> implements IUsuarioDao {
             return null;
         }
     }
+
+	public Long verificaNomeExistente(String nome) {
+		StringBuilder sb = new StringBuilder();
+        sb.append("Select count(u.id) From Usuario u where ");
+        sb.append("u.nome = ?");
+
+		return (Long) buscarUnicoResultadoPorJpql(sb.toString(), nome);
+	}
     
 }
