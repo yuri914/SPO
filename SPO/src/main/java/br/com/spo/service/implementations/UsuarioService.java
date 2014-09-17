@@ -6,16 +6,16 @@ import br.com.spo.service.exceptions.AutenticacaoException;
 import br.com.spo.service.interfaces.IUsuarioService;
 
 public class UsuarioService implements IUsuarioService {
-
+    
     private static final long serialVersionUID = -8144950014959940389L;
-
+    
     private UsuarioDao usuarioDao;
-
+    
     @Override
     public void salvar(Usuario usuario) {
         getUsuarioDao().salvar(usuario);
     }
-
+    
     public Usuario autenticarUsuario(Usuario usuario) throws AutenticacaoException {
         Usuario usuarioAutenticado = getUsuarioDao().autenticar(usuario);
         if (usuarioAutenticado == null) {
@@ -23,17 +23,16 @@ public class UsuarioService implements IUsuarioService {
         }
         return usuarioAutenticado;
     }
-
-    public boolean verificaNomeExistente(String nome) {
-    	return getUsuarioDao().verificaNomeExistente(nome).intValue() > 0;
-    }
     
+    public boolean verificarUsuarioExistente(String username) {
+        return getUsuarioDao().verificaUsuarioExistente(username).intValue() > 0;
+    }
+
     public UsuarioDao getUsuarioDao() {
         if (usuarioDao == null) {
             usuarioDao = new UsuarioDao();
         }
         return usuarioDao;
     }
-
     
 }

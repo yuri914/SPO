@@ -26,9 +26,7 @@
 	                <p:messages />
 	                <h:panelGrid columns="2" columnClasses="label, value">
 	                    <p:outputLabel value="Nome:" for="nome" />
-	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" label="Nome" id="nome">
-	                    	<f:ajax render="nome" event="blur" listener="#{cadastroUsuarioBean.nomeExistente}"></f:ajax>
-	                    </p:inputText>
+	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.nome}" label="Nome" id="nome" />
 	 
 	                    <p:outputLabel value="Gênero:" for="genero"/>
 	                    <p:selectOneRadio value="#{cadastroUsuarioBean.contato.usuario.genero}" label="Gênero" id="genero">
@@ -43,7 +41,12 @@
 						</p:calendar>
 	 
 	                    <p:outputLabel value="Usuario: "  for="usuario"/>
-	                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.username}" id="usuario"/>
+	                    <h:panelGroup>
+		                    <p:inputText value="#{cadastroUsuarioBean.contato.usuario.username}" id="usuario">
+		                    	<f:ajax event="keyup" listener="#{cadastroUsuarioBean.verificarUsuarioExistente}"></f:ajax>
+		                    </p:inputText>
+		                    <p:message for="usuario"></p:message>
+	                    </h:panelGroup>
 	                    
 						<p:outputLabel value="Senha: " for="password"/>
 	                    <p:password value="#{cadastroUsuarioBean.contato.usuario.password}" id="password"/>
